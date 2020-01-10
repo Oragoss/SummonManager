@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Spell } from '../models/Spell';
+// import { Spell } from '../models/Spell';
+import { ChooseSpellService } from '../shared/choose-spell.service';
 
 @Component({
   selector: 'app-choose-class',
@@ -8,39 +9,47 @@ import { Spell } from '../models/Spell';
 })
 export class ChooseClassComponent implements OnInit {
 
-  spells: Spell[] = [];
-  summonElementals: Spell;
-  summonWoodlandBeings: Spell;
+  // spells: Spell[];
 
-  constructor() { }
+  // hideDruidSpellList: boolean;
+  // hideWizardSpellList: boolean;
+  // hideClericSpellList: boolean;
+  // hideSorcererSpellList: boolean;
+  // hideWarlockSpellList: boolean;
+
+  constructor(private chooseSpellService: ChooseSpellService) { }
 
   ngOnInit() {
-    this.summonElementals =  {
-      Name: 'Summon Elementals',
-      Classes: ['Wizard', 'Druid', 'Warlock']
-    }
-    this.summonWoodlandBeings =  {
-      Name: 'Summon Woodland Beings',
-      Classes: ['Cleric', 'Druid', 'Warlock']
-    }
-
-    this.spells.push(this.summonElementals, this.summonWoodlandBeings)
+    // this.spells = this.chooseSpellService.getSpells();
   }
 
-  selectSpellList(e) {
-    const playerClass = e.target.id;
+  // selectSpellList(e) {
+  //   const playerClass = e.target.id;
 
-    switch(playerClass) {
-      case 'druid':
-        break;
-      case 'wizard':
-        break;
-      case 'cleric':
-        break;
-      case 'sorcerer':
-        break;
-      case 'warlock':
-        break;
-    }
-  }
+  //   switch(playerClass) {
+  //     case 'druid':
+  //         this.hideDruidSpellList = true;
+  //       break;
+  //     case 'wizard':
+  //         this.hideWizardSpellList = true;
+  //       break;
+  //     case 'cleric':
+  //         this.hideClericSpellList = true;
+  //       break;
+  //     case 'sorcerer':
+  //         this.hideSorcererSpellList = true;
+  //       break;
+  //     case 'warlock':
+  //         this.hideWarlockSpellList = true;
+  //       break;
+  //   }
+  // }
+
+  // resetClassList() {
+  //   this.hideDruidSpellList = false;
+  //   this.hideWizardSpellList = false;
+  //   this.hideClericSpellList = false;
+  //   this.hideSorcererSpellList = false;
+  //   this.hideWarlockSpellList = false;
+  // }
 }

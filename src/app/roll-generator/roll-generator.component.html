@@ -1,29 +1,89 @@
 <div class="container-fluid">
-    <div class="jumbotron text-center" style="margin-top: 5%;">
+    <div class="containter" style="margin-top: 5%;" *ngIf="!showRoller">
+        <div class="form-group row">
+            <label for="creature" class="col-sm-2 col-form-label">Creature</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="creature" [(ngModel)]="name" ngDefaultControl >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="numberOfCreatures" class="col-sm-2 col-form-label">Number of Creatures</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="numberOfCreatures" [(ngModel)]="numberOfCreatures" ngDefaultControl >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="armorClass" class="col-sm-2 col-form-label">AC</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="armorClass" [(ngModel)]="armorClass" ngDefaultControl >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="health" class="col-sm-2 col-form-label">HP</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="health" [(ngModel)]="health" ngDefaultControl >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="attackModifier" class="col-sm-2 col-form-label">Attack Modifier</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="attackModifier" [(ngModel)]="attackModifier" ngDefaultControl >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="numberOfDice" class="col-sm-2 col-form-label">Number of Dice</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="numberOfDice" [(ngModel)]="numberOfDice" ngDefaultControl >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Dice Type</label>
+            <select class="custom-select col-sm-4" (change)="determineDiceType($event)">
+                <option value="4">d4</option>
+                <option value="6">d6</option>
+                <option value="8">d8</option>
+                <option value="10">d10</option>
+                <option value="12">d12</option>
+            </select>
+            <div class="col-sm-4"></div>
+        </div>
         <div class="row">
-            <div class="col-md-4 col-xs-12">Wolf</div>
-            <div class="col-md-4 col-xs-12">Wolf</div>
-            <div class="col-md-4 col-xs-12">Wolf</div>
+            <div class="col-md-4"></div>
+            <input (click)="generateBattle()" type="button" class="col-md-4 btn btn-success btn-lg btn-block" value="Start" />
+            <div class="col-md-4"></div>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4"></div>
-            <input type="button" class="col-md-4 btn btn-danger btn-lg btn-block" value="Attack" />
-            <div class="col-md-4"></div>
+    <div *ngIf="showRoller">
+        <div class="jumbotron text-center" style="margin-top: 5%;">
+            <div class="row">
+                <div class="col-md-4 col-xs-12" *ngFor="let creature of summonedCreatures; let i = index">
+                    {{creature.Name}}
+                    <br /><br />
+                    AC: {{creature.ArmorClass}}
+                    <br /><br />
+                    HP: {{creature.Health}}
+                </div>
+            </div>
         </div>
-        <div class="row" style="margin-top: 5%;">
-            <div class="col-md-4"></div>
-            <h2 class="col-md-4 text-center">Saving Throws</h2>
-            <div class="col-md-4"></div>
-        </div>
-        <div class="row">
-            <button type="button" class="btn btn-outline-danger col-md-2 col-xs-12 saving-throw">Strength</button>
-            <button type="button" class="btn btn-outline-success col-md-2 col-xs-12 saving-throw">Dexterity</button>
-            <button type="button" class="btn btn-outline-warning col-md-2 col-xs-12 saving-throw">Constitution</button>
-            <button type="button" class="btn btn-outline-primary col-md-2 col-xs-12 saving-throw">Intelligence</button>
-            <button type="button" class="btn btn-outline-secondary col-md-2 col-xs-12 saving-throw">Wisdom</button>
-            <button type="button" class="btn btn-outline-info col-md-2 col-xs-12 saving-throw">Charisma</button>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <input type="button" class="col-md-4 btn btn-danger btn-lg btn-block" value="Attack" />
+                <div class="col-md-4"></div>
+            </div>
+            <div class="row" style="margin-top: 5%;">
+                <div class="col-md-4"></div>
+                <h2 class="col-md-4 text-center">Saving Throws</h2>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-outline-danger col-md-2 col-xs-12 saving-throw">Strength</button>
+                <button type="button" class="btn btn-outline-success col-md-2 col-xs-12 saving-throw">Dexterity</button>
+                <button type="button" class="btn btn-outline-warning col-md-2 col-xs-12 saving-throw">Constitution</button>
+                <button type="button" class="btn btn-outline-primary col-md-2 col-xs-12 saving-throw">Intelligence</button>
+                <button type="button" class="btn btn-outline-secondary col-md-2 col-xs-12 saving-throw">Wisdom</button>
+                <button type="button" class="btn btn-outline-info col-md-2 col-xs-12 saving-throw">Charisma</button>
+            </div>
         </div>
     </div>
 </div>
