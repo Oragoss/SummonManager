@@ -10,11 +10,12 @@ import { BattleService } from '../shared/battle.service';
 export class RollGeneratorComponent implements OnInit {
 
   public name: string = 'Dryad, water elemental, wolf, etc...';
-  public numberOfCreatures: number = 1;
+  public numberOfCreatures: number = 3;
+  public enemyAC: number = 15;
   public armorClass: number = 8;
   public health: number = 30;
   public attackModifier: number = 4;
-  public diceType: number;
+  public diceType: number = 4;
   public numberOfDice: number = 2;
 
   public summonedCreatures: SummonedCreature[] = [];
@@ -27,21 +28,18 @@ export class RollGeneratorComponent implements OnInit {
   }
 
   determineDiceType(e) {
-    console.log(e.target.value);
     this.diceType = e.target.value;
   }
 
-  generateBattle() {
+  generateSummons() {
     this.showRoller = true;
-    for(let i = 0; i < this.numberOfCreatures; i++) {
-      this.summonedCreatures.push({
-        Name: this.name,
-        ArmorClass: this.armorClass,
-        Health: this.health,
-        AttackModifier: this.attackModifier,
-        DiceType: this.diceType,
-        NumberOfDice: this.numberOfDice
-      });
-    }
+    this.summonedCreatures = this.battleService.generateSummons(this.numberOfCreatures, this.name, this.armorClass, this.health, this.attackModifier, this.diceType, this.numberOfDice);
+  }
+
+  attack() {
+    this.battleService.setSummonCreatureDamage(this.attackModifier, this.diceType, this.numberOfDice, this.enemyAC, this.summonedCreatures)
+    console.log(this.summonedCreatures[0])
+    console.log(this.summonedCreatures[1])
+    console.log(this.summonedCreatures[2])
   }
 }

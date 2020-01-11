@@ -6,4 +6,5 @@ export class SummonedCreature {
     AttackModifier: number;
     DiceType: number;
     NumberOfDice: number;
+    CurrentDamage: string;
 }
